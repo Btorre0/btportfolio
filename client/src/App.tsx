@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Resume from "./pages/Resume";
 import "./index.css";
+import CatDock from "./components/CatDock";
 
 function HomeSections() {
   const ref = useRef(null);
@@ -108,9 +109,11 @@ function App() {
         <Route path="/" element={<HomeSections />} />
         <Route path="/resume" element={<Resume />} />
       </Routes>
+      <CatDock />
     </>
   );
 }
+
 
 export default App;
 

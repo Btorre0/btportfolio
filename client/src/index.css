@@ -41,3 +41,23 @@ a:hover {
   color: #ff914d;
   border-bottom: 2px solid #ff914d;
 }
+
+.cat-shadow {
+  filter: drop-shadow(0 3px 8px rgba(255, 145, 77, 0.4));
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ffb3c6;
+  border-radius: 10px;
+}
+
+a {
+  color: #ff6f3c;
+  text-decoration: underline;
+}
+a:hover {
+  color: #ff914d;
+}
