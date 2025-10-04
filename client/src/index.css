@@ -1,6 +1,43 @@
+html,
 body {
+  scroll-behavior: smooth;
+  height: 100%;
   margin: 0;
-  font-family: sans-serif;
-  background: #fce4ec; /* light pink */
-  color: #333;
+  padding: 0;
+}
+/* for smooth scrolling */
+#root {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+/* Each full-page section */
+section {
+  scroll-snap-align: start;
+  height: 100vh;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-stop: always;
+  overscroll-behavior: none;
+}
+
+.active-link {
+  color: #ff6f3c !important;
+  font-weight: 600;
+  border-bottom: 2px solid #ff6f3c;
+  transition: all 0.3s ease;
+}
+.inactive-link {
+  color: #333 !important;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+a:hover { 
+  color: #ff914d;
+  border-bottom: 2px solid #ff914d;
 }

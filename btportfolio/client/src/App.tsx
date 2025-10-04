@@ -1,12 +1,12 @@
 // src/App.tsx
 import { Routes, Route, Link } from "react-router-dom";
-import Home from "../../../client/src/pages/Home";
-import About from "../../../client/src/pages/About";
-import Resume from "../../../client/src/pages/Resume";
-import Projects from "../../../client/src/pages/Projects";
-import Hobbies from "../../../client/src/pages/Hobbies";
-import Contact from "../../../client/src/pages/Contact";
-import AssistantDock from "../../../client/src/pages/AssistantDock";
+import Home from "../../../client/src/sections/Home";
+import About from "../../../client/src/sections/About";
+import Resume from "../../../client/src/sections/Resume";
+import Projects from "../../../client/src/sections/Projects";
+import Hobbies from "../../../client/src/sections/Hobbies";
+import Contact from "../../../client/src/sections/Contact";
+import AssistantDock from "../../../client/src/sections/AssistantDock";
 
 function App() {
   return (
