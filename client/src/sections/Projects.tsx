@@ -17,14 +17,14 @@ const projects = [
     link: "https://github.com/btorre0/photo-gal",
     color: "linear-gradient(135deg, #fff0f6 0%, #ffd6e0 100%)",
   },
-  {
-    title: "MindSketch — AI Brainstorming Tool (In Progress)",
-    description:
-      "An intelligent idea mapper using generative AI to visualize concept clusters and spark creativity.",
-    tech: ["Python", "Flask", "OpenAI API", "React", "D3.js"],
-    link: "https://github.com/Btorre0/mindsketch",
-    color: "linear-gradient(135deg, #ffd6e0 0%, #fff0f6 100%)",
-  },
+  // {
+  //   title: "MindSketch — AI Brainstorming Tool (In Progress)",
+  //   description:
+  //     "An intelligent idea mapper using generative AI to visualize concept clusters and spark creativity.",
+  //   tech: ["Python", "Flask", "OpenAI API", "React", "D3.js"],
+  //   link: "https://github.com/Btorre0/mindsketch",
+  //   color: "linear-gradient(135deg, #ffd6e0 0%, #fff0f6 100%)",
+  // },
   {
     title: "Thread-Fork — Parallel Process Simulator",
     description:
