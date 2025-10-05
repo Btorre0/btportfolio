@@ -1,119 +1,126 @@
-import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import Resume from "./pages/Resume";
-import "./index.css";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import CatDock from "./components/CatDock";
+import Home from "./sections/Home";
+import About from "./sections/About";
+import Projects from "./sections/Projects";
+import Contact from "./sections/Contact";
+import Resume from "./pages/Resume";
+import catImage from "../assets/cat.png";
 
-function HomeSections() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
-
+function App() {
   return (
-    <div
-      ref={ref}
-      style={{
-        scrollBehavior: "smooth",
-        background: "linear-gradient(135deg, #ffd6e0, #fff0f6)",
-      }}
-    >
-      {/* HOME SECTION */}
-      <section
-        id="home"
-        style={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          overflow: "hidden",
-        }}
-      >
-        <motion.h1
-          style={{
-            color: "#ff6f3c",
-            fontSize: "4rem",
-            fontWeight: "700",
-            y,
-            scale,
-            textShadow: "0 4px 12px rgba(0,0,0,0.1)",
-          }}
-        >
-          Welcome 🐱
-        </motion.h1>
-        <p>Scroll down to learn more about me!</p>
-      </section>
+    <div style={{ overflowX: "hidden", fontFamily: "Inter, sans-serif" }}>
+      <CatLogo />
 
-      {/* ABOUT */}
-      <section
-        id="about"
-        style={{
-          height: "100vh",
-          padding: "5rem 2rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backdropFilter: "blur(15px)",
-          background: "rgba(255, 214, 224, 0.6)",
-        }}
-      >
-        <h1 style={{ color: "#ff6f3c" }}>About Me</h1>
-      </section>
+      <Routes>
+        {/* Home page contains terminal + other sections */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Home />
+              <SectionWrapper id="about" bg="rgba(255,214,224,0.6)">
+                <About />
+              </SectionWrapper>
+              <SectionWrapper id="projects" bg="rgba(255,240,246,0.6)">
+                <Projects />
+              </SectionWrapper>
+              <SectionWrapper id="contact" bg="rgba(255,230,236,0.6)">
+                <Contact />
+              </SectionWrapper>
+            </>
+          }
+        />
+        <Route path="/resume" element={<Resume />} />
+      </Routes>
 
-      {/* PROJECTS */}
-      <section
-        id="projects"
-        style={{
-          height: "100vh",
-          padding: "5rem 2rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backdropFilter: "blur(15px)",
-          background: "rgba(255, 240, 246, 0.6)",
-        }}
-      >
-        <h1 style={{ color: "#ff6f3c" }}>Projects</h1>
-      </section>
-
-      {/* CONTACT */}
-      <section
-        id="contact"
-        style={{
-          height: "100vh",
-          padding: "5rem 2rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backdropFilter: "blur(15px)",
-          background: "rgba(255, 230, 236, 0.6)",
-        }}
-      >
-        <h1 style={{ color: "#ff6f3c" }}>Contact</h1>
-      </section>
+      <CatDock />
+      <Footer />
     </div>
   );
 }
 
-function App() {
+/* 🐱 Persistent Cat Logo */
+function CatLogo() {
+  const navigate = useNavigate();
+
   return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomeSections />} />
-        <Route path="/resume" element={<Resume />} />
-      </Routes>
-      <CatDock />
-    </>
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      style={{
+        position: "fixed",
+        top: "1rem",
+        left: "1.5rem",
+        zIndex: 100,
+        cursor: "pointer",
+      }}
+      onClick={() => {
+        navigate("/");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
+    >
+      <img
+        src={catImage}
+        alt="cat logo"
+        style={{
+          width: "42px",
+          height: "42px",
+          borderRadius: "8px",
+          transition: "transform 0.3s ease",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
+        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+      />
+    </motion.div>
   );
 }
 
+/* 🌸 Section Wrapper for About, Projects, Contact */
+function SectionWrapper({ id, bg, children }: any) {
+  return (
+    <section
+      id={id}
+      style={{
+        minHeight: "100vh",
+        padding: "6rem 2rem",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        background: bg,
+        backdropFilter: "blur(10px)",
+      }}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        style={{ width: "100%", maxWidth: "1200px" }}
+      >
+        {children}
+      </motion.div>
+    </section>
+  );
+}
+
+/* 🌸 Footer */
+function Footer() {
+  return (
+    <footer
+      style={{
+        textAlign: "center",
+        padding: "2rem 0",
+        fontSize: "0.9rem",
+        color: "#594a4e",
+        background: "linear-gradient(180deg, #fff0f6 0%, #ffd6e0 100%)",
+      }}
+    >
+      © {new Date().getFullYear()} Beatriz Torres Archundia · Made with ❤️
+    </footer>
+  );
+}
 
 export default App;
-

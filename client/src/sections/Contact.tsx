@@ -1,76 +1,130 @@
-// src/pages/Contact.tsx
-import { useState } from "react";
+import { motion } from "framer-motion";
+import { Mail, Linkedin, Github, FileDown } from "lucide-react";
 
-function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const res = await fetch("http://localhost:5000/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      setStatus(data.msg);
-      setForm({ name: "", email: "", message: "" }); // reset after send
-    } catch (err) {
-      setStatus("❌ Something went wrong, please try again.");
-    }
-  };
-
+export default function Contact() {
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1 style={{ color: "#ff6f3c" }}>Contact Me</h1>
-      <form
-        onSubmit={handleSubmit}
-        style={{ display: "flex", flexDirection: "column", gap: "1rem", maxWidth: "400px" }}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "5rem 2rem",
+        gap: "2.5rem",
+        textAlign: "center",
+        maxWidth: "800px",
+        margin: "0 auto",
+      }}
+    >
+      {/* Header */}
+      <motion.h1
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        style={{
+          fontSize: "2.5rem",
+          fontWeight: "700",
+          color: "#ff6f3c",
+        }}
       >
-        <input
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          placeholder="Your Name"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          placeholder="Your Email"
-          required
-        />
-        <textarea
-          name="message"
-          value={form.message}
-          onChange={handleChange}
-          placeholder="Your Message"
-          required
-        />
-        <button
-          type="submit"
-          style={{
-            background: "#ff914d",
-            color: "white",
-            padding: "0.7rem",
-            border: "none",
-            borderRadius: "6px",
-            cursor: "pointer",
-          }}
+        Let’s Connect
+      </motion.h1>
+
+      {/* Message */}
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2, duration: 0.6 }}
+        style={{
+          fontSize: "1.05rem",
+          lineHeight: "1.8",
+          color: "#33272a",
+          maxWidth: "600px",
+        }}
+      >
+        I’m always open to connecting with other developers, creators, or
+        collaborators. Whether you want to discuss a project, share ideas, or
+        just say hi — I’d love to hear from you!
+      </motion.p>
+
+      {/* Contact Links */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.4, duration: 0.6 }}
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "1.5rem",
+        }}
+      >
+        {/* Email */}
+        <a
+          href="mailto:Btorre0@csu.fullerton.edu"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={buttonStyle}
         >
-          Send
-        </button>
-      </form>
-      {status && <p style={{ marginTop: "1rem" }}>{status}</p>}
+          <Mail size={20} color="#ff6f3c" /> Email Me
+        </a>
+
+        {/* LinkedIn */}
+        <a
+          href="https://www.linkedin.com/in/beatriztorres/"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={buttonStyle}
+        >
+          <Linkedin size={20} color="#ff6f3c" /> LinkedIn
+        </a>
+
+        {/* GitHub */}
+        <a
+          href="https://github.com/btorre0"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={buttonStyle}
+        >
+          <Github size={20} color="#ff6f3c" /> GitHub
+        </a>
+
+        {/* Resume */}
+        <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" style={buttonStyle}>
+          <FileDown size={20} color="#ff6f3c" /> View Resume
+        </a>
+      </motion.div>
+
+      {/* Subtle glow in background */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 0.25 }}
+        transition={{ duration: 1.2 }}
+        style={{
+          position: "absolute",
+          width: "450px",
+          height: "450px",
+          borderRadius: "50%",
+          background:
+            "radial-gradient(circle at center, rgba(255,182,193,0.4), transparent 70%)",
+          filter: "blur(70px)",
+          zIndex: -1,
+        }}
+      />
     </div>
   );
 }
 
-export default Contact;
+const buttonStyle: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  gap: "0.6rem",
+  textDecoration: "none",
+  color: "#33272a",
+  background: "rgba(255, 111, 60, 0.1)",
+  borderRadius: "999px",
+  padding: "0.8rem 1.5rem",
+  fontWeight: 500,
+  transition: "background 0.3s, transform 0.2s",
+  boxShadow: "0 3px 8px rgba(0,0,0,0.08)",
+};

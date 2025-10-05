@@ -11,6 +11,19 @@ body {
   overflow-y: scroll;
   height: 100vh;
 }
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
+}
+
+section {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
 
 /* Each full-page section */
 section {
@@ -60,4 +73,9 @@ a {
 }
 a:hover {
   color: #ff914d;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 1.2em;
 }
