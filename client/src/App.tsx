@@ -16,8 +16,10 @@ function App() {
         overflowX: "hidden",
         fontFamily: "Inter, sans-serif",
         scrollBehavior: "smooth",
+        paddingBottom: "env(safe-area-inset-bottom)", // ✅ Prevent cutoff on iPhones
       }}
     >
+      <GlobalStyles />
       <CatLogo />
 
       <Routes>
@@ -119,7 +121,7 @@ function SectionWrapper({ id, bg, children }: any) {
   );
 }
 
-/* 🌸 Responsive Footer */
+/* 🌸 Footer */
 function Footer() {
   return (
     <footer
@@ -133,6 +135,26 @@ function Footer() {
     >
       © {new Date().getFullYear()} Beatriz Torres Archundia · Made with ❤️
     </footer>
+  );
+}
+
+/* Global Styles (fixes anchor overlap + iOS spacing) */
+function GlobalStyles() {
+  return (
+    <style>{`
+      html {
+        scroll-padding-top: 100px; /* ✅ Prevent section titles overlapping */
+      }
+      body {
+        margin: 0;
+        background-color: #fff;
+        -webkit-tap-highlight-color: transparent;
+        font-smooth: always;
+      }
+      ::selection {
+        background: rgba(255, 111, 60, 0.3);
+      }
+    `}</style>
   );
 }
 
