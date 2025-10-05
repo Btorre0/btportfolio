@@ -6,11 +6,12 @@ export default function About() {
       style={{
         display: "flex",
         flexDirection: "row",
+        flexWrap: "wrap",
         alignItems: "center",
         justifyContent: "center",
-        flexWrap: "wrap",
-        gap: "3rem",
+        gap: "2.5rem",
         maxWidth: "1000px",
+        padding: "1rem",
       }}
     >
       {/* Portrait */}
@@ -19,8 +20,8 @@ export default function About() {
         whileInView={{ opacity: 1, scale: 1, x: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
         style={{
-          flex: "0 0 260px",
-          height: "260px",
+          flex: "0 1 240px",
+          height: "240px",
           borderRadius: "50%",
           background:
             "linear-gradient(135deg, #ffb3c6 0%, #ffd6e0 50%, #fff0f6 100%)",
@@ -43,25 +44,26 @@ export default function About() {
         />
       </motion.div>
 
-      {/* Text Content */}
+      {/* Text */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         style={{
-          flex: "1",
+          flex: "1 1 320px",
           maxWidth: "600px",
           color: "#33272a",
-          fontSize: "1.05rem",
+          fontSize: "clamp(0.9rem, 2.5vw, 1.05rem)",
           lineHeight: "1.8",
         }}
       >
         <h1
           style={{
-            fontSize: "2.5rem",
-            fontWeight: "700",
+            fontSize: "clamp(1.8rem, 5vw, 2.5rem)",
+            fontWeight: 700,
             marginBottom: "1rem",
             color: "#ff6f3c",
+            textAlign: "center",
           }}
         >
           About Me
@@ -92,19 +94,19 @@ export default function About() {
           helping others learn something new, or trying out new sports!
         </p>
 
-        {/* Subtle callout */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
           style={{
-            marginTop: "1.5rem",
-            padding: "1rem 1.25rem",
+            marginTop: "1.2rem",
+            padding: "1rem 1.2rem",
             borderLeft: "4px solid #ff6f3c",
-            background: "rgba(255, 111, 60, 0.06)",
+            background: "rgba(255,111,60,0.06)",
             borderRadius: "0.5rem",
-            fontSize: "0.95rem",
+            fontSize: "clamp(0.85rem, 2.5vw, 0.95rem)",
             color: "#594a4e",
+            textAlign: "center",
           }}
         >
           “Technology is best when it brings people together.” — Matt Mullenweg

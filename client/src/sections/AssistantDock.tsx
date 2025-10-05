@@ -33,13 +33,16 @@ function AssistantDock() {
             border: "2px solid #ff914d",
             borderRadius: "12px",
             padding: "1rem",
-            width: "250px",
+            width: "clamp(200px, 50vw, 250px)",
             boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+            fontSize: "clamp(0.8rem, 3vw, 0.9rem)",
           }}
         >
-          <h3 style={{ margin: "0 0 0.5rem 0", color: "#ff6f3c" }}>🐱 About Me</h3>
-          <p style={{ fontSize: "0.9rem" }}>
-            Hi, I’m Beatriz! I’m a CS student, developer, and cat lover.  
+          <h3 style={{ margin: "0 0 0.5rem 0", color: "#ff6f3c", fontSize: "clamp(1rem, 3vw, 1.1rem)" }}>
+            🐱 About Me
+          </h3>
+          <p>
+            Hi, I’m Beatriz! I’m a CS student, developer, and cat lover.
             Ask me about my projects, resume, or hobbies!
           </p>
         </div>
@@ -50,10 +53,10 @@ function AssistantDock() {
           background: "#ff914d",
           border: "none",
           borderRadius: "50%",
-          width: "60px",
-          height: "60px",
+          width: "clamp(55px, 15vw, 65px)",
+          height: "clamp(55px, 15vw, 65px)",
           color: "#fff",
-          fontSize: "1.5rem",
+          fontSize: "clamp(1.3rem, 5vw, 1.6rem)",
           cursor: "pointer",
           boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
         }}

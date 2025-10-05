@@ -11,7 +11,13 @@ import catImage from "../assets/cat.png";
 
 function App() {
   return (
-    <div style={{ overflowX: "hidden", fontFamily: "Inter, sans-serif" }}>
+    <div
+      style={{
+        overflowX: "hidden",
+        fontFamily: "Inter, sans-serif",
+        scrollBehavior: "smooth",
+      }}
+    >
       <CatLogo />
 
       <Routes>
@@ -56,7 +62,7 @@ function CatLogo() {
       style={{
         position: "fixed",
         top: "1rem",
-        left: "1.5rem",
+        left: "1.2rem",
         zIndex: 100,
         cursor: "pointer",
       }}
@@ -81,7 +87,7 @@ function CatLogo() {
   );
 }
 
-/* 🌸 Compact Section Wrapper */
+/* 🌸 Responsive Section Wrapper */
 function SectionWrapper({ id, bg, children }: any) {
   return (
     <section
@@ -101,7 +107,11 @@ function SectionWrapper({ id, bg, children }: any) {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        style={{ width: "100%", maxWidth: "1000px" }}
+        style={{
+          width: "100%",
+          maxWidth: "1000px",
+          padding: "0 1rem",
+        }}
       >
         {children}
       </motion.div>
@@ -109,14 +119,14 @@ function SectionWrapper({ id, bg, children }: any) {
   );
 }
 
-/* 🌸 Footer */
+/* 🌸 Responsive Footer */
 function Footer() {
   return (
     <footer
       style={{
         textAlign: "center",
         padding: "1.5rem 0",
-        fontSize: "0.9rem",
+        fontSize: "clamp(0.7rem, 2vw, 0.9rem)",
         color: "#594a4e",
         background: "linear-gradient(180deg, #fff0f6 0%, #ffd6e0 100%)",
       }}
