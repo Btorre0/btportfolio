@@ -63,7 +63,7 @@ export default function Contact() {
             icon: <Mail size={20} color="#ff6f3c" />,
           },
           {
-            href: "https://www.linkedin.com/in/beatriztorres/",
+            href: "https://www.linkedin.com/in/btorre0",
             text: "LinkedIn",
             icon: <Linkedin size={20} color="#ff6f3c" />,
           },
