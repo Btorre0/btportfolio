@@ -18,13 +18,21 @@ const projects = [
     color: "linear-gradient(135deg, #fff0f6 0%, #ffd6e0 100%)",
   },
   {
-    title: "MindSketch — AI Brainstorming Tool",
+    title: "MindSketch — AI Brainstorming Tool (In Progress)",
     description:
       "An intelligent idea mapper that helps users brainstorm visually using generative AI. Integrates text clustering and concept visualization to spark creativity.",
     tech: ["Python", "Flask", "OpenAI API", "React", "D3.js"],
-    link: "#",
+    link: "https://github.com/Btorre0/mindsketch",
     color: "linear-gradient(135deg, #ffd6e0 0%, #fff0f6 100%)",
   },
+  {
+  title: "Thread-Fork — Parallel Process Simulator",
+  description:
+    "Simulates Unix-style forking and threading patterns in C. Demonstrates PID/TID management, process trees, and scheduling visualization.",
+  tech: ["C", "POSIX Threads", "Unix"],
+  link: "https://github.com/Btorre0/thready-fork-ass7",
+  color: "linear-gradient(135deg, #ffd6e0 0%, #fff0f6 100%)",
+},
 ];
 
 export default function Projects() {

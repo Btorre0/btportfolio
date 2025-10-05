@@ -11,18 +11,23 @@ body {
   overflow-y: scroll;
   height: 100vh;
 }
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  overflow-y: scroll;
-  scroll-snap-type: y proximity;
+  line-height: 1.5;
+  font-size: 15.5px;
 }
 
-section {
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
+h1, h2, h3 {
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+section p {
+  margin-bottom: 0.7rem;
 }
 
 /* Each full-page section */

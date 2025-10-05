@@ -89,6 +89,8 @@ function CatDock() {
       response = `You can view her resume on the top navigation bar or <a href="/resume" style="color:#ff6f3c;text-decoration:underline;">click here</a>.`;
     } else if (lower.includes("skills")) {
       response = `Beatriz is skilled in React, Node.js, TypeScript, Python, C++, and AI tools like OpenCV and ONNX.`;
+    }else if (lower.includes("experience") || lower.includes("internship")) {
+      response = `She’s worked as a Computer Programmer at Eikon Technologies, building AI-powered and web-based software.`;
     } else if (
       lower.includes("education") ||
       lower.includes("school") ||
@@ -142,7 +144,7 @@ function CatDock() {
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
     if (!userInput.trim()) return;
-    const userMsg = { sender: "user", text: userInput.trim() };
+    const userMsg: Message = { sender: "user", text: userInput.trim() };
     setMessages((prev) => [...prev, userMsg]);
     handleLunaResponse(userInput);
     setUserInput("");
@@ -160,7 +162,7 @@ function CatDock() {
         },
       ];
       introMsgs.forEach((msg, i) => {
-        setTimeout(() => setMessages((prev) => [...prev, msg]), i * 1200);
+        setTimeout(() => setMessages((prev) => [...prev, msg as Message]), i * 1200);
       });
     }
   }, [isChatOpen]);
