@@ -32,7 +32,7 @@ export default function About() {
         }}
       >
         <img
-          src="public/images/me.png"
+          src="/images/me.png"
           alt="Beatriz Torres Archundia"
           style={{
             width: "100%",
