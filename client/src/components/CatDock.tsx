@@ -31,7 +31,7 @@ function CatDock() {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Section references for scrolling
+  // Section references
   const sections: Record<string, string> = {
     home: "home",
     about: "about",
@@ -45,17 +45,33 @@ function CatDock() {
     let response = "";
     let links: string[] = [];
 
-    // Greetings
-    if (/(hello|hi|hey|hola|what's up|sup)/.test(lower)) {
-      response =
-        "Hi there! I’m Luna — Beatriz’s little AI cat assistant. How can I help you today?";
+    const hour = new Date().getHours();
+    let greeting = "Hello";
+    if (hour < 12) greeting = "Good morning";
+    else if (hour < 18) greeting = "Good afternoon";
+    else greeting = "Good evening";
+
+    // --- Personalized greeting ---
+    const savedName = localStorage.getItem("visitorName");
+    if (/(hello|hi|hey|hola)/.test(lower)) {
+      response = savedName
+        ? `${greeting}, ${savedName}! I’m Luna 🐾 How’s your day going?`
+        : `${greeting}! I’m Luna — Beatriz’s little cat assistant. How can I help you today?`;
     }
 
-    // Detect section names
+    // --- Remember user's name ---
+    if (lower.includes("my name is")) {
+      const name = input.split("my name is")[1]?.trim().split(" ")[0];
+      if (name) {
+        localStorage.setItem("visitorName", name);
+        response = `Nice to meet you, ${name}! I’ll remember that 💕`;
+      }
+    }
+
+    // --- Section links ---
     for (const key in sections) {
       if (lower.includes(key)) links.push(key);
     }
-
     if (links.length > 0) {
       const list = links
         .map(
@@ -66,8 +82,6 @@ function CatDock() {
       response = `You can find ${
         links.length > 1 ? "those sections" : "that section"
       } here: ${list}.`;
-
-      // auto scroll to the first one
       const target = links[0];
       setTimeout(() => {
         scroller.scrollTo(target, {
@@ -78,7 +92,7 @@ function CatDock() {
       }, 1000);
     }
 
-    // Info-based questions
+    // --- Info & personality ---
     if (lower.includes("github")) {
       response = `Beatriz’s GitHub is <a href="https://github.com/Btorre0" target="_blank" style="color:#ff6f3c;text-decoration:underline;">github.com/Btorre0</a>.`;
     } else if (lower.includes("email")) {
@@ -86,10 +100,10 @@ function CatDock() {
     } else if (lower.includes("linkedin")) {
       response = `Here’s her LinkedIn: <a href="https://linkedin.com/in/btorre0" target="_blank" style="color:#ff6f3c;text-decoration:underline;">linkedin.com/in/btorre0</a>.`;
     } else if (lower.includes("resume")) {
-      response = `You can view her resume on the top navigation bar or <a href="/resume" style="color:#ff6f3c;text-decoration:underline;">click here</a>.`; // hold
+      response = `You can view her resume on the top navigation bar or <a href="/resume" style="color:#ff6f3c;text-decoration:underline;">click here</a>.`;
     } else if (lower.includes("skills")) {
       response = `Beatriz is skilled in React, Node.js, TypeScript, Python, C++, and AI tools like OpenCV and ONNX.`;
-    }else if (lower.includes("experience") || lower.includes("internship")) {
+    } else if (lower.includes("experience") || lower.includes("internship")) {
       response = `She’s worked as a Computer Programmer at Eikon Technologies, building AI-powered and web-based software.`;
     } else if (
       lower.includes("education") ||
@@ -107,8 +121,6 @@ function CatDock() {
       response = `Beatriz enjoys coding, photography, art, and spending time at the gym (or trying out new sports!).`;
     } else if (lower.includes("location") || lower.includes("where")) {
       response = `She’s based in Placentia, California.`;
-    } else if (lower.includes("experience") || lower.includes("job")) {
-      response = `She’s worked as a Computer Programmer at Eikon Technologies, building AI-powered and web-based software.`;
     } else if (
       lower.includes("about her") ||
       lower.includes("tell me about her") ||
@@ -119,6 +131,34 @@ function CatDock() {
       She’s now studying Computer Science at Cal State Fullerton, working on AI and full-stack projects that blend creativity and tech.`;
     } else if (lower.includes("portfolio") || lower.includes("website")) {
       response = `This is her personal portfolio — built from scratch using React, TypeScript, Vite, and Framer Motion.`;
+    } else if (lower.includes("project")) {
+      response = `Beatriz has built several cool projects, like:<br/>
+      🏠 <strong>Rentora</strong> – A home rental platform built with React + Node.js<br/>
+      💡 <strong>MindSketch</strong> – An AI brainstorming web app<br/>
+      🎥 <strong>FocusCue</strong> – An AI camera control tool using OpenCV.<br/>
+      You can explore them in the Projects section!`;
+    } else if (lower.includes("joke")) {
+      const jokes = [
+        "Why did the developer go broke? Because she used up all her cache 😹",
+        "What’s a cat’s favorite programming language? Scratch!",
+        "404: sense of humor not found… just kidding 😼",
+      ];
+      response = jokes[Math.floor(Math.random() * jokes.length)];
+    } else if (lower.includes("compliment")) {
+      const compliments = [
+        "You look like someone who writes clean React code 😺",
+        "Wow, your energy is brighter than Beatriz’s orange color palette!",
+        "You’re absolutely purr-fect today 💫",
+      ];
+      response = compliments[Math.floor(Math.random() * compliments.length)];
+    } else if (lower.includes("sad") || lower.includes("tired")) {
+      response =
+        "Aww 💕 I’m sorry you feel that way. Maybe take a stretch or grab a snack?";
+    } else if (lower.includes("happy")) {
+      response = "Yay! That makes me happy too! 😺";
+    } else if (lower.includes("stressed")) {
+      response =
+        "Remember, Beatriz swears by quick walks and music breaks for stress. You got this! 💪";
     } else if (lower.includes("help")) {
       response =
         "You can ask me about her resume, GitHub, email, projects, or any section of the website!";
@@ -135,9 +175,14 @@ function CatDock() {
         "Hmm… I’m not sure about that yet, but I’ll tell Beatriz to teach me soon!";
     }
 
+    // Typing effect + sound cue
+    setMessages((prev) => [...prev, { sender: "luna", text: "..." }]);
     setTimeout(() => {
-      setMessages((prev) => [...prev, { sender: "luna", text: response }]);
-    }, 400);
+      setMessages((prev) => [...prev.slice(0, -1), { sender: "luna", text: response }]);
+      const audio = new Audio("/sounds/meow.mp3");
+      audio.volume = 0.2;
+      audio.play().catch(() => {});
+    }, 800);
   };
 
   // Handle user message
@@ -236,9 +281,7 @@ function CatDock() {
               gap: "0.5rem",
             }}
           >
-            <h4 style={{ margin: "0", color: "#ff6f3c", textAlign: "center" }}>
-              Luna
-            </h4>
+            <h4 style={{ margin: "0", color: "#ff6f3c", textAlign: "center" }}>Luna</h4>
 
             <div
               style={{
@@ -261,8 +304,7 @@ function CatDock() {
                       msg.sender === "luna"
                         ? "rgba(255, 214, 224, 0.9)"
                         : "rgba(255, 255, 255, 0.95)",
-                    alignSelf:
-                      msg.sender === "luna" ? "flex-start" : "flex-end",
+                    alignSelf: msg.sender === "luna" ? "flex-start" : "flex-end",
                     padding: "0.6rem 0.9rem",
                     borderRadius: "12px",
                     boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
