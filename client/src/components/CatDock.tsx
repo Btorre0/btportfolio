@@ -86,7 +86,7 @@ function CatDock() {
     } else if (lower.includes("linkedin")) {
       response = `Here’s her LinkedIn: <a href="https://linkedin.com/in/btorre0" target="_blank" style="color:#ff6f3c;text-decoration:underline;">linkedin.com/in/btorre0</a>.`;
     } else if (lower.includes("resume")) {
-      response = `You can view her resume on the top navigation bar or <a href="/resume" style="color:#ff6f3c;text-decoration:underline;">click here</a>.`;
+      response = `You can view her resume on the top navigation bar or <a href="/resume" style="color:#ff6f3c;text-decoration:underline;">click here</a>.`; // hold
     } else if (lower.includes("skills")) {
       response = `Beatriz is skilled in React, Node.js, TypeScript, Python, C++, and AI tools like OpenCV and ONNX.`;
     }else if (lower.includes("experience") || lower.includes("internship")) {
